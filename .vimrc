@@ -1,49 +1,59 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set history=700
+filetype plugin on
+set nocompatible
+set ruler
+set number
+set backspace=eol,start,indent
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+set ignorecase
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'c.vim'
-Plugin 'valloric/youcompleteme'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-surround'
-Plugin 'terryma/vim-multiple-cursors'
+set hlsearch
 
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+set incsearch
 
-let mapleader = "\<Space>"
+set list listchars=tab:>-,trail:.,extends:>
+set list
+set softtabstop=2
+set shiftwidth=2
+set tabstop=2
+set expandtab
 
-filetype plugin indent on
+set autoindent 
+set cindent
+set t_Co=256
 syntax on
-set encoding=utf-8
+colorscheme torte
 
-nmap <F6> :NERDTreeToggle<CR>
-nmap <S-Enter> O<Esc>
-nmap <CR> o<Esc>
-inoremap jk <ESC>
-set number 
+highlight LineNr ctermbg=none ctermfg=darkgrey
+highlight Comment cterm=bold ctermfg=blue cterm=bold
+highlight Statement cterm=bold ctermfg=darkyellow cterm=bold
+highlight Normal ctermbg=none ctermfg=none
 
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-"autocmd vimenter * NERDTree | wincmd p
-let  g:C_UseTool_cmake    = 'yes'
-let  g:C_UseTool_doxygen = 'yes'
+set wildmode=longest,list,full
+set wildmenu
+
+map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+map <Leader>v :vsplit <C-R>=expand("%:p:h") . "/" <CR>
+map <Leader>s :split <C-R>=expand("%:p:h") . "/" <CR>
+map <Leader>r :r <C-R>=expand("%:p:h") . "/" <CR>
+
+autocmd BufNewFile,BufRead *.ts  set syntax=javascript
+
+
+function! Tab_Or_Complete()
+  if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
+    return "\<C-N>"
+  else
+    return "\<Tab>"
+  endif
+endfunction
+inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
+
+function! White()
+  highlight Normal ctermbg=none ctermfg=none
+endfunction
+function! Red()
+  highlight Normal ctermbg=none ctermfg=130
+endfunction
+
+set dictionary="/usr/share/dict/american-english"
