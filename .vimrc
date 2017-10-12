@@ -79,7 +79,7 @@ highlight PMenuThumb ctermbg=white ctermfg=red
 "syntax enable
 "colorscheme monokai
 "syntax enable
-"set background=dark
+set background=dark
 "let g:solarized_termcolors=256
 "colorscheme solarized
 
@@ -109,6 +109,17 @@ let g:ycm_min_num_of_chars_for_completion=1
 let g:ycm_cache_omnifunc=0
 "" complete syntax keywords
 let g:ycm_seed_identifiers_with_syntax=1
+"" speed to complete
+let g:ycm_min_num_of_chars_for_completion = 3
+"" syntax highlighting changes 
+let g:ycm_allow_changing_updatetime = 0
+"" change colors of syntax/warning highlighting
+highlight YcmErrorSection guibg=#ffffcc 
+highlight YcmWarningSection guibg=#ffffcc
+highlight YcmErrorLine guibg=#ffffcc 
+highlight YcmWarningLine guibg=#ffffcc
+highlight YcmErrorSection ctermbg=37
+highlight YcmWarningSection ctermbg=37
 
 "some snippet stuff
 " make YCM compatible with UltiSnips (using supertab)
