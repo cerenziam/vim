@@ -1,4 +1,5 @@
-set nocompatible              " be iMproved, required
+set nocompatible              " be iMproved, required 
+
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -36,12 +37,29 @@ let mapleader = "\<Space>"
 filetype plugin indent on
 syntax on
 set encoding=utf-8
+set number 
+
 
 nmap <F6> :NERDTreeToggle<CR>
 nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
 inoremap jk <ESC>
-set number 
+
+"some nice key remappings
+nnoremap <leader>s :w<cr>
+inoremap <leader>s <C-c>:w<cr>
+noremap <leader>q :q<cr>
+noremap <C-l> <C-w>l
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-s> <C-w>s
+noremap <C-v> <C-w>v
+noremap <S-l> gt
+noremap <S-h> gT
+nnoremap Q @q
+vnoremap Q :norm @q<cr>
+noremap <leader>a =ip
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 "autocmd vimenter * NERDTree | wincmd p
