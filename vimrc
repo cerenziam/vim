@@ -18,7 +18,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-surround'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'raimondi/delimitmate'
+"Plugin 'raimondi/delimitmate'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 Plugin 'altercation/vim-colors-solarized'
@@ -26,6 +26,11 @@ Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'ervandew/supertab'
 Plugin 'lervag/vimtex' 
+Plugin 'kshenoy/vim-signature'
+Plugin 'kien/ctrlp.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'ludovicchabant/vim-gutentags'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -110,6 +115,7 @@ hi Pmenu ctermfg=NONE ctermbg=236 cterm=NONE guifg=NONE guibg=#64666d gui=NONE
 hi PmenuSel ctermfg=NONE ctermbg=24 cterm=NONE guifg=NONE guibg=#204a87 gui=NONE
 highlight PMenuSBar  ctermbg=red   ctermfg=white
 highlight PMenuThumb ctermbg=white ctermfg=red
+hi MatchParen ctermbg=5 
 set background=dark
 
 "Plugin Configurations
@@ -165,11 +171,17 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-"" vimtex...For skim, backward search occurs with shift+cmd 
+"" vimtex...For skim, backward search occurs with shift+cmd+mouseclick
+""to perform bibliography searches after \cite{ , press <CTRL-X><CTRL-O> 
 let g:vimtex_view_general_viewer = '/Applications/Skim.app/Contents/SharedSupport/displayline'
 let g:vimtex_view_general_options = '-r @line @pdf @tex'
 let g:vimtex_view_general_options_latexmk = '-r' 
 let g:vimtex_fold_enabled = 0
+if !exists('g:ycm_semantic_triggers')
+    let g:ycm_semantic_triggers = {}
+  endif
+let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
+
 
 " This adds a callback hook that updates Skim after compilation
 let g:vimtex_compiler_callback_hooks = ['UpdateSkim']
@@ -191,6 +203,9 @@ function! UpdateSkim(status)
   endif
 endfunction 
 
+""Settings for Tagbar
+nnoremap <silent> <F9> :TagbarToggle<CR> 
+let g:tagbar_ctags_bin = '/usr/local/Cellar/universal-ctags/HEAD-d9944ef/bin/ctags' 
 
 ""This let's me have cool colors for macvim 
 if has("gui_running")
