@@ -10,15 +10,15 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-"Plugin 'c.vim'
 Plugin 'valloric/youcompleteme' 
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'xuyuanp/nerdtree-git-plugin'
 Plugin 'tpope/vim-surround'
 Plugin 'terryma/vim-multiple-cursors'
-"Plugin 'raimondi/delimitmate'
+Plugin 'raimondi/delimitmate'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 Plugin 'altercation/vim-colors-solarized'
@@ -85,13 +85,9 @@ nnoremap <leader>s :w<cr>
 noremap <leader>q :q<cr>
 inoremap jk <ESC>
 
-"the next are some I'm not sold on
-nmap <S-Enter> O<Esc> "" why doesn't this work??? I read that it's a persistent problem. 
-nmap <CR> o<Esc>  ""you can't "push" text to the next line without entering insert mode! 
-inoremap {<CR> {<CR>}<Esc>ko  "" not so sold on keeping this one
-" Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
-" which is the default
-map Y y$
+" Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy
+" but you can no longer use Y to copy a whole line, then p or P to paste it while creating a new line
+"map Y y$
 " Map <leader>h (redraw screen) to also turn off search highlighting 
 nnoremap <leader>h :nohl<CR>
 "some mappings concerning macros
@@ -123,18 +119,28 @@ set background=dark
 let g:nerdtree_tabs_open_on_gui_startup=0
 nnoremap <Leader>f :NERDTreeToggle<Enter>
 nnoremap <silent> <Leader>v :NERDTreeFind<CR>
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let NERDTreeQuitOnOpen = 1
+""Automatically delete the buffer of the file you just deleted with NerdTree:
+let NERDTreeAutoDeleteBuffer = 1
 
 "some C tool stuff I forget why exists
 let  g:C_UseTool_cmake    = 'yes'
 let  g:C_UseTool_doxygen = 'yes'
 
 "some YCM configurations
+"autoclose preview window
+let g:ycm_autoclose_preview_window_after_completion=1
+"let g:ycm_autoclose_preview_window_after_insertion = 1
+" Apply YCM FixIt
+map <F9> :YcmCompleter FixIt<CR>
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 "" turn on completion in comments
 "let g:ycm_complete_in_comments=1
 "" load ycm conf by default
 let g:ycm_confirm_extra_conf=0
-"" turn on tag completion
+"" turn on tag completion...in command line, make sure to use ctags --fields=+l *
 let g:ycm_collect_identifiers_from_tags_files=1
 "" only show completion as a list instead of a sub-window
 "set completeopt-=preview
@@ -148,6 +154,8 @@ let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_min_num_of_chars_for_completion = 3
 "" syntax highlighting changes 
 let g:ycm_allow_changing_updatetime = 0
+"" to allow JediHTTP to always be called for Python completion
+let g:ycm_python_binary_path = 'python'
 "" change colors of syntax/warning highlighting
 highlight YcmErrorSection guibg=#ccff00 
 highlight YcmWarningSection guibg=#ccff00
