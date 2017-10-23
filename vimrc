@@ -116,25 +116,26 @@ set background=dark
 
 "Plugin Configurations
 "nerdtree configurations
-let g:nerdtree_tabs_open_on_gui_startup=0
+"let g:nerdtree_tabs_open_on_gui_startup=0
 nnoremap <Leader>f :NERDTreeToggle<Enter>
 nnoremap <silent> <Leader>v :NERDTreeFind<CR>
 let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-let NERDTreeQuitOnOpen = 1
+"let NERDTreeDirArrows = 1
+"let NERDTreeQuitOnOpen = 1
 ""Automatically delete the buffer of the file you just deleted with NerdTree:
-let NERDTreeAutoDeleteBuffer = 1
+"let NERDTreeAutoDeleteBuffer = 1
 
 "some C tool stuff I forget why exists
 let  g:C_UseTool_cmake    = 'yes'
 let  g:C_UseTool_doxygen = 'yes'
 
 "some YCM configurations
+let g:ycm_always_populate_location_list = 1
 "autoclose preview window
 let g:ycm_autoclose_preview_window_after_completion=1
 "let g:ycm_autoclose_preview_window_after_insertion = 1
 " Apply YCM FixIt
-map <F9> :YcmCompleter FixIt<CR>
+map <C-F> :YcmCompleter FixIt<CR> :ccl <CR>
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 "" turn on completion in comments
 "let g:ycm_complete_in_comments=1
